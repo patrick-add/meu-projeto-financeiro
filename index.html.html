@@ -1,0 +1,1248 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ordinare - Planilha Financeira</title>
+    <style>
+        /* Estilo do Botão com Animação */
+.btn-cta {
+    background-color: #28a745; /* Verde vibrante da imagem */
+    color: white;
+    text-decoration: none;
+    padding: 18px 40px;
+    border-radius: 50px;
+    font-weight: bold;
+    font-size: 1.2rem;
+    display: inline-block;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    text-transform: uppercase;
+    
+    /* Chamada da animação */
+    animation: pulsar 2s infinite ease-in-out;
+    transition: transform 0.2s;
+}
+
+/* Hover para parar ou reagir ao mouse */
+.btn-cta:hover {
+    background-color: #218838;
+    transform: scale(1.1); /* Aumenta um pouco mais ao passar o mouse */
+    animation-play-state: paused; /* Opcional: para de pular quando o mouse está em cima */
+}
+
+/* Definição da animação "pular para frente e voltar" */
+@keyframes pulsar {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+    50% {
+        transform: scale(1.08); /* O botão "pula" para frente */
+        box-shadow: 0 15px 25px rgba(0,0,0,0.3); /* A sombra aumenta para dar profundidade */
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+}
+        :root {
+            --primary-dark: #0a2a22; /* Verde escuro do topo */
+            --accent-green: #00b300; /* Verde do botão e checks */
+            --bg-light: #ffffff;
+            --text-main: #333;
+            --text-light: #ffffff;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        /* Top Header Area */
+        .top-bar {
+            background-color: var(--primary-dark);
+            color: var(--text-light);
+            text-align: center;
+            padding: 20px 10px;
+        }
+
+        .logo {
+            font-weight: bold;
+            font-size: 24px;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 5px;
+        }
+
+        .top-bar p {
+            margin: 0;
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 40px 20px;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 2rem;
+            font-weight: 500;
+            color: #444;
+            margin-bottom: 20px;
+        }
+
+        .sub-headline {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        /* Image Display */
+        .mockup-container {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto 40px auto;
+        }
+
+        .mockup-container img {
+            width: 100%;
+            height: auto;
+        }
+
+        /* Features List */
+        .features-list {
+            list-style: none;
+            padding: 0;
+            display: inline-block;
+            text-align: left;
+            margin-bottom: 40px;
+        }
+
+        .features-list li {
+            margin: 12px 0;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            color: #555;
+        }
+
+        .features-list li::before {
+            content: '✔';
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            background-color: var(--accent-green);
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 24px;
+            margin-right: 15px;
+            font-size: 0.8rem;
+        }
+
+        /* CTA Section */
+        .cta-container {
+            padding-bottom: 50px;
+        }
+
+        .btn-cta {
+            background-color: var(--accent-green);
+            color: white;
+            text-decoration: none;
+            padding: 18px 40px;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            display: inline-block;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: transform 0.2s;
+            text-transform: uppercase;
+        }
+
+        .btn-cta:hover {
+            transform: scale(1.05);
+        }
+
+        .cta-subtext {
+            display: block;
+            margin-top: 15px;
+            color: #888;
+            font-size: 0.95rem;
+        }
+
+        /* Security Icons */
+        .security-row {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 30px;
+            opacity: 0.7;
+        }
+
+        .security-item {
+            font-size: 0.75rem;
+            font-weight: bold;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 1.5rem; }
+            .btn-cta { font-size: 1rem; width: 90%; padding: 15px 10px; }
+        }
+    </style>
+    <style>
+    /* Container que alinha tudo em linha */
+    .selos-container {
+        display: flex;
+        flex-direction: row; /* Força ficar um ao lado do outro */
+        justify-content: center; /* Centraliza no meio da página */
+        align-items: center;
+        gap: 30px; /* Espaço entre cada selo */
+        padding: 20px;
+        background-color: #ffffff;
+        font-family: sans-serif;
+    }
+
+    .selo-item {
+        display: flex;
+        align-items: center;
+        gap: 10px; /* Espaço entre o ícone e o texto */
+    }
+
+    /* Ajuste o tamanho da imagem aqui */
+    .selo-item img {
+        width: 45px; 
+        height: auto;
+        display: block;
+    }
+
+    .selo-texto {
+        display: flex;
+        flex-direction: column;
+        line-height: 1.2;
+        color: #333;
+        text-align: left;
+    }
+
+    .selo-texto strong {
+        font-size: 14px;
+        font-weight: 800;
+        white-space: nowrap; /* Impede que o texto quebre em telas médias */
+    }
+
+    /* Responsivo: Se a tela for muito pequena (celular), eles se empilham */
+    @media (max-width: 600px) {
+        .selos-container {
+            flex-direction: column;
+            align-items: flex-start;
+            padding-left: 20%;
+        }
+    }
+</style>
+</head>
+<body>
+
+    <header class="top-bar">
+        <div class="logo">
+            <span>PLANE</span>
+        </div>
+        <p>A Planilha mais <strong>completa e com o melhor preço</strong> do Mercado!</p>
+    </header>
+
+    <main class="hero">
+        <h1>Organize suas Finanças com uma Planilha Completa, Automática e Eficiente!</h1>
+        <p class="sub-headline">
+            Em apenas <strong>uma única ferramenta</strong>, você terá total controle e visão das sua <strong>Vida Financeira.</strong>
+        </p>
+
+        <div class="mockup-container">
+            <img src="../Desktop/img/Design sem nome (2).png" alt="Demonstração da Planilha em vários dispositivos">
+        </div>
+
+        <ul class="features-list">
+            <li>Pagamento único, SEM Mensalidades</li>
+            <li>Preenchimento Fácil e intuitivo</li>
+            <li>Suporte no email e direct</li>
+            <li>Completa e Automática</li>
+        </ul>
+
+        <section class="cta-container">
+            <a href="https://pay.kiwify.com.br/5vqCE15?afid=eEdfLgwq" class="btn-cta">Quero organizar minha vida!</a>
+            <span class="cta-subtext">Pagamento único, acesso imediato!</span>
+
+            <div class="trust-bar">
+        
+        <!--
+        <div style="width: 100%; text-align: center; padding: 10px 0; background: #fff;">
+    <div style="display: inline-flex; justify-content: center; align-items: center; gap: 10px; font-family: sans-serif; white-space: nowrap;">
+
+        <div style="display: flex; align-items: center; gap: 5px;">
+            <img src="LINK_DA_IMAGEM_1" style="width: 30px; height: auto;" alt="Selo 1">
+            <div style="display: flex; flex-direction: column; line-height: 1; text-align: left;">
+                <span style="font-weight: bold; font-size: 11px; color: #333;">Satisfação</span>
+                <span style="font-weight: bold; font-size: 11px; color: #333;">Garantida</span>
+            </div>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 5px;">
+            <img src="LINK_DA_IMAGEM_2" style="width: 30px; height: auto;" alt="Selo 2">
+            <div style="display: flex; flex-direction: column; line-height: 1; text-align: left;">
+                <span style="font-weight: bold; font-size: 11px; color: #333;">Compra</span>
+                <span style="font-weight: bold; font-size: 11px; color: #333;">Segura</span>
+            </div>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 5px;">
+            <img src="LINK_DA_IMAGEM_3" style="width: 30px; height: auto;" alt="Selo 3">
+            <div style="display: flex; flex-direction: column; line-height: 1; text-align: left;">
+                <span style="font-weight: bold; font-size: 11px; color: #333;">Privacidade</span>
+                <span style="font-weight: bold; font-size: 11px; color: #333;">Protegida</span>
+            </div>
+        </div>
+
+    </div> 
+-->
+    <div style="width: 100%; text-align: center; padding: 20px 0; background-color: transparent;">
+    <img src="../Desktop/img/selos.png" 
+         alt="Selos de Segurança" 
+         style="max-width: 100%; height: auto; display: inline-block; vertical-align: middle;">
+</div>
+</div>
+
+    </div>
+        </section>
+    </main>
+
+    <section class="section-problem">
+    
+       <div class="news-card hidden-pop" style="background: none !important; border: none !important; box-shadow: none !important; padding: 0 !important; display: flex; justify-content: center; align-items: center;">
+    
+    <img src="../Desktop/img/g1.png" 
+         alt="Selos de Segurança" 
+         style="max-width: 100%; height: auto; display: block; filter: drop-shadow(0px 2px 4px rgba(0,0,0,0.1));">
+
+</div>
+        <!--
+        <div class="news-card hidden-pop">
+            <div class="news-header">
+                <span class="g1-logo">g1</span>
+                <span class="category-title">ECONOMIA</span>
+            </div>
+            <div class="news-sub-header">EDUCAÇÃO FINANCEIRA</div>
+            <div class="news-content">
+                <h2>Três a cada quatro brasileiros apontam o <span>dinheiro como sua maior preocupação</span>, diz pesquisa</h2>
+                <p>Apenas 17,8% dos entrevistados afirmaram que conseguem cobrir os gastos e poupar algum dinheiro ao fim do mês.</p>
+            </div>
+        </div> 
+        -->
+
+        <div class="alert-text">
+            <h3>Sem controle financeiro pessoal, <span class="highlight-green">sua vida financeira entra em risco!</span></h3>
+            <p>A falta de organização financeira faz com que você perca o controle do que ganha e do que gasta.</p>
+        </div>
+
+        <div class="consequences">
+            <p>Isso resulta em <strong>atrasos, dívidas, uso excessivo do cartão de crédito e dificuldade para guardar dinheiro ou planejar o futuro.</strong></p>
+            
+            <style>
+    .bad-list {
+        list-style: none; /* Remove as bolinhas padrão */
+        padding: 0;
+        margin: 20px 0;
+    }
+
+    .bad-list li {
+        position: relative;
+        padding-left: 30px; /* Espaço para o X */
+        margin-bottom: 10px;
+        font-family: Arial, sans-serif;
+        font-size: 16px;
+        color: #ffffff;
+        display: flex;
+        align-items: center;
+    }
+
+    /* Cria o X vermelho automaticamente antes de cada linha */
+    .bad-list li::before {
+        content: "✕"; /* Símbolo do X */
+        position: absolute;
+        left: 0;
+        color: #ff0000; /* Vermelho vivo */
+        font-weight: bold;
+        font-size: 20px;
+    }
+</style>
+
+<ul class="bad-list">
+    <li>Desorganização nos gastos mensais</li>
+    <li>Mistura de contas fixas com gastos variáveis</li>
+    <li>Endividamento e falta de planejamento</li>
+</ul>
+        </div>
+    </div>
+</section>
+
+
+<style>
+ 
+    .section-problem {
+        background-color: #0a2a22; /* Fundo verde escuro idêntico */
+        color: #ffffff;
+        padding: 60px 20px;
+        text-align: center;
+        font-family: 'Segoe UI', sans-serif;
+    }
+
+    .container {
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    /* Estilização do Card estilo G1 */
+    .news-card {
+        background: white;
+        color: #333;
+        border-radius: 8px;
+        overflow: hidden;
+        text-align: left;
+        margin-bottom: 40px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        
+    }
+/* Estado Inicial: Card invisível */
+.hidden-pop {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    transform: scale(0.5) translateY(40px) !important;
+    transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+    display: block; /* Garante que o navegador veja o elemento */
+}
+
+/* Estado Ativo: Quando o JS detecta o scroll */
+.show-pop {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: scale(1) translateY(0) !important;
+}
+    .news-header {
+        background: #c4170c;
+        color: white;
+        padding: 10px 15px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .g1-logo { font-weight: 900; font-size: 1.5rem; }
+    .category-title { font-weight: bold; font-size: 0.9rem; letter-spacing: 1px; }
+
+    .news-sub-header {
+        background: #911109;
+        color: white;
+        font-size: 0.7rem;
+        padding: 5px 15px;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    
+
+    .news-content { padding: 25px; }
+    .news-content h2 { font-size: 1.6rem; line-height: 1.2; margin-bottom: 15px; color: #222; }
+    .news-content h2 span { background: #eee; padding: 0 4px; }
+    .news-content p { color: #666; font-size: 0.95rem; line-height: 1.4; }
+
+    /* Texto e Destaques */
+    .alert-text h3 { font-size: 1.8rem; margin-bottom: 20px; }
+    .highlight-green { color: #00ff00; }
+    .alert-text p { opacity: 0.8; font-size: 1.1rem; line-height: 1.6; }
+
+    .consequences { margin-top: 30px; text-align: left; }
+    .consequences p { font-size: 1.1rem; margin-bottom: 25px; }
+
+    
+
+    </style>
+    <script>
+document.addEventListener("DOMContentLoaded", function() {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('show-pop');
+            }
+        });
+    }, { threshold: 0.1 }); // Dispara logo no início da aparição
+
+    // Seleciona todos os elementos que devem "pular"
+    document.querySelectorAll('.hidden-pop').forEach(el => observer.observe(el));
+});
+</script>
+
+<section class="section-solution">
+    <div class="container">
+        
+        <div class="mockup-display">
+            <img src="../Desktop/Design sem nome (3).png" alt="Planilha em múltiplos dispositivos">
+        </div>
+
+        <div class="solution-header">
+            <h2>Organize suas finanças pessoais <span class="highlight-green">de forma simples e prática.</span></h2>
+            <p>Com uma planilha de controle financeiro pessoal, você visualiza seus gastos, organiza suas contas e toma decisões financeiras com muito mais clareza e segurança.</p>
+        </div>
+
+        <ul class="benefit-list">
+            <li>Visão clara de receitas e despesas</li>
+            <li>Organização das contas mensais</li>
+            <li>Tomada de decisões baseada em dados</li>
+            <li>Redução de gastos desnecessários</li>
+            <li>Planejamento e Previsão Financeira</li>
+        </ul>
+
+    </div>
+</section>
+
+<style>
+    /* Estilos Gerais da Seção */
+    .section-solution {
+        background-color: #0a2a22; /* Mesmo verde escuro das seções anteriores */
+        color: #ffffff;
+        padding: 60px 20px;
+        text-align: left; /* Alinhamento à esquerda conforme a imagem */
+        font-family: 'Segoe UI', sans-serif;
+    }
+
+    .container {
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    /* Imagem Mockup */
+    .mockup-display {
+        text-align: center;
+        margin-bottom: 40px;
+    }
+
+    .mockup-display img {
+        width: 100%;
+        max-width: 500px;
+        height: auto;
+    }
+
+    /* Textos */
+    .solution-header h2 {
+        font-size: 1.8rem;
+        line-height: 1.2;
+        margin-bottom: 20px;
+        font-weight: 700;
+    }
+
+    .highlight-green {
+        color: #00ff00; /* Verde limão vibrante */
+    }
+
+    .solution-header p {
+        font-size: 1.1rem;
+        line-height: 1.5;
+        opacity: 0.9;
+        margin-bottom: 30px;
+    }
+
+    /* Lista de Benefícios */
+    .benefit-list {
+        list-style: none;
+        padding: 0;
+    }
+
+    .benefit-list li {
+        margin-bottom: 12px;
+        display: flex;
+        align-items: center;
+        font-size: 1.05rem;
+        font-weight: 600;
+    }
+
+    /* Ícone de Check Verde */
+    .benefit-list li::before {
+        content: '✔';
+        display: inline-block;
+        width: 22px;
+        height: 22px;
+        background-color: #00b300;
+        color: white;
+        border-radius: 50%;
+        text-align: center;
+        line-height: 22px;
+        margin-right: 15px;
+        font-size: 0.8rem;
+        flex-shrink: 0;
+    }
+
+    /* Ajuste para Mobile */
+    @media (max-width: 480px) {
+        .solution-header h2 { font-size: 1.5rem; }
+        .solution-header p { font-size: 1rem; }
+        .benefit-list li { font-size: 0.95rem; }
+    }
+</style>
+
+<section class="section-dashboard">
+    <div class="container">
+        
+        <div class="dashboard-header">
+            <h2>Como a <span class="highlight-green-inline">Plane</span> vai te ajudar no seu controle financeiro?</h2>
+        </div>
+
+        <div class="notebook-mockup hidden-pop">
+            <img src="../Desktop/Design sem nome (4).png" alt="Dashboard Financeiro Ordinare no Notebook">
+        </div>
+
+        <div class="dashboard-content">
+            <h3>Dashboard Financeiro Pessoal</h3>
+            
+            <p>Tenha uma visão completa e estratégica do seu dinheiro com um dashboard prático, intuitivo e 100% automático.</p>
+            
+            <p>Com gráficos dinâmicos e indicadores visuais, você analisa em segundos as principais métricas do seu dinheiro — <strong>Entradas, saídas, lucros, saldo em conta, evolução financeira, contas a pagar e receber e muito mais.</strong></p>
+            
+            <p>Tudo o que você precisa para decisões mais inteligentes e tranquilidade financeira todos os meses.</p>
+        </div>
+
+        <hr class="separator">
+    </div>
+</section>
+
+<style>
+    /* Estilos da Seção Dashboard */
+    .section-dashboard {
+        background-color: #ffffff; /* Fundo branco conforme imagem */
+        color: #333333;
+        padding: 60px 20px 20px 20px;
+        text-align: center;
+        font-family: 'Segoe UI', sans-serif;
+    }
+
+    .dashboard-header h2 {
+        font-size: 1.8rem;
+        color: #000;
+        max-width: 500px;
+        margin: 0 auto 40px auto;
+        line-height: 1.2;
+    }
+
+    .highlight-green-inline {
+        color: #00ff00; /* Verde limão da marca */
+    }
+
+    /* Estilo do Mockup */
+    .notebook-mockup {
+        margin-bottom: 40px;
+    }
+
+    .notebook-mockup img {
+        width: 100%;
+        max-width: 550px;
+        height: auto;
+    }
+
+    /* Conteúdo de Texto */
+    .dashboard-content {
+        max-width: 600px;
+        margin: 0 auto;
+        text-align: left; /* Texto volta a ser alinhado à esquerda */
+    }
+
+    .dashboard-content h3 {
+        font-size: 1.6rem;
+        color: #222;
+        margin-bottom: 25px;
+        text-align: center; /* Subtítulo centralizado */
+        font-weight: 800;
+    }
+
+    .dashboard-content p {
+        font-size: 1.05rem;
+        line-height: 1.6;
+        color: #444;
+        margin-bottom: 20px;
+    }
+
+    .dashboard-content strong {
+        color: #222;
+    }
+
+    /* Linha divisória fina no final */
+    .separator {
+        border: 0;
+        border-top: 1px solid #ddd;
+        margin-top: 40px;
+        width: 100%;
+    }
+
+    @media (max-width: 480px) {
+        .dashboard-header h2 { font-size: 1.5rem; }
+        .dashboard-content h3 { font-size: 1.4rem; }
+        .dashboard-content p { font-size: 1rem; }
+    }
+</style>
+<!--
+<section class="section-premium">
+    <div class="container">
+        
+        <div class="premium-header">
+            <h2>Receba <span class="highlight-green-premium">+08 FERRAMENTAS EXCLUSIVAS</span> adquirindo o Plano Premium!</h2>
+        </div>
+
+        <div class="bonus-card hidden-pop">
+            <div class="badge-premium">Incluso no Plano Premium</div>
+            
+            <div class="card-inner">
+                <div class="mockup-bonus">
+                    <img src="planilha-compras.png" alt="Planilha de Lista de Compras">
+                </div>
+
+                <div class="bonus-info">
+                    <h3>Planilha de Lista de Compras</h3>
+                    <p>Chega de surpresas no caixa do supermercado. Organize sua lista de compras, acompanhe gastos por categoria e veja em tempo real se você está dentro do orçamento.</p>
+                    
+                    <ul class="check-list-bonus">
+                        <li>Cadastro de produtos, categorias e quantidades</li>
+                        <li>Controle de gastos por categoria</li>
+                        <li>Comparação entre gasto real e orçamento</li>
+                        <li>Cálculo automático do valor total da compra</li>
+                        <li>Gráficos claros para visualizar onde você gasta mais</li>
+                    </ul>
+                </div>
+
+                <div class="special-offer-badge">
+                    <span>▶ Oferta Especial, incluso no PLANO PREMIUM</span>
+                </div>
+            </div>
+        </div>
+        </div>
+</section>
+-->
+<style>
+    /* Estilos da Seção Premium */
+    .section-premium {
+        background-color: #0a2a22; /* Fundo verde escuro */
+        color: #ffffff;
+        padding: 60px 20px;
+        font-family: 'Segoe UI', sans-serif;
+    }
+
+    .premium-header {
+        text-align: center;
+        margin-bottom: 50px;
+    }
+
+    .premium-header h2 {
+        font-size: 1.6rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        line-height: 1.3;
+    }
+
+    .highlight-green-premium {
+        color: #00ff00;
+        display: block; /* Faz o destaque ficar em uma linha nova se necessário */
+    }
+
+    /* Estilização do Card Branco */
+    .bonus-card {
+        background-color: #ffffff;
+        border-radius: 20px;
+        color: #333;
+        margin: 40px auto;
+        max-width: 500px;
+        position: relative;
+        padding-top: 25px; /* Espaço para o badge verde */
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+
+    /* Etiqueta Verde no Topo */
+    .badge-premium {
+        background-color: #00ff00;
+        color: #000;
+        font-weight: 800;
+        padding: 8px 25px;
+        border-radius: 50px;
+        position: absolute;
+        top: -18px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 0.85rem;
+        white-space: nowrap;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    .card-inner {
+        padding: 20px;
+        text-align: center;
+    }
+
+    .mockup-bonus img {
+        width: 100%;
+        border-radius: 10px;
+        margin-bottom: 20px;
+    }
+
+    .bonus-info h3 {
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+        color: #222;
+    }
+
+    .bonus-info p {
+        font-size: 1rem;
+        line-height: 1.4;
+        color: #555;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    /* Lista de Benefícios do Bônus */
+    .check-list-bonus {
+        list-style: none;
+        padding: 0;
+        text-align: left;
+        margin-bottom: 30px;
+    }
+
+    .check-list-bonus li {
+        font-size: 0.95rem;
+        font-weight: 600;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        color: #333;
+    }
+
+    .check-list-bonus li::before {
+        content: '✔';
+        width: 20px;
+        height: 20px;
+        background-color: #28a745;
+        color: white;
+        border-radius: 50%;
+        display: inline-block;
+        text-align: center;
+        line-height: 20px;
+        font-size: 0.7rem;
+        margin-right: 12px;
+        flex-shrink: 0;
+    }
+
+    /* Faixa Vermelha de Oferta */
+    .special-offer-badge {
+        background-color: #ff0000;
+        color: #fff;
+        padding: 12px;
+        border-radius: 50px;
+        font-weight: 800;
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        margin-top: 10px;
+    }
+
+    @media (max-width: 480px) {
+        .premium-header h2 { font-size: 1.3rem; }
+        .bonus-info h3 { font-size: 1.3rem; }
+    }
+</style>
+
+<section class="section-offers" id="offers-area">
+    <div class="container">
+        
+        <!--
+        <div class="offers-header">
+            <h2 class="highlight-black">Escolha o plano ideal para sua <span class="highlight-green">Liberdade Financeira!</span></h2>
+        </div>
+
+        
+        <div class="offer-card bronze hidden-pop">
+            <div class="card-tag">Plano Essencial</div>
+            <div class="card-body">
+                <h3>Plano Bronze</h3>
+                <p class="price">R$ 29,90</p>
+                <ul class="offer-features">
+                    <li>Planilha Financeira Completa</li>
+                    <li>Vídeo Aula de Uso</li>
+                    <li>Suporte via E-mail</li>
+                </ul>
+                <a href="#" class="btn-buy-simple">Quero este plano</a>
+            </div>
+        </div>
+    -->
+
+        <div class="premium-header">
+            <h2>Receba <span class="highlight-green-premium">A FERRAMENTA EXCLUSIVA</span> adquirindo o Plano Premium!</h2>
+        </div>
+
+        <div class="bonus-card hidden-pop">
+            <div class="badge-premium">Incluso no Plano Premium</div>
+            
+            <div class="card-inner">
+                <div class="mockup-bonus">
+                    <img src="../Desktop/Design sem nome (4).png" alt="Planilha de Lista de Compras">
+                </div>
+
+                <div class="bonus-info">
+                    <h3>Planilha Completa</h3>
+                    <p>Chega de surpresas no fim do mês. Organize suas finanças, acompanhe gastos por categoria e veja em tempo real se você está dentro do orçamento.</p>
+                    
+                    <ul class="check-list-bonus">
+                        <li>Cadastro de receitas, despesas</li>
+                        <li>Controle de gastos por categoria</li>
+                        <li>Comparação entre gasto real e orçamento</li>
+                        <li>Cálculo automático do valores totais</li>
+                        <li>Gráficos claros para visualizar onde você gasta mais</li>
+                    </ul>
+                </div>
+
+                <div class="special-offer-badge">
+                    <a href="https://pay.kiwify.com.br/5vqCE15?afid=eEdfLgwq" class="special-offer-badge" style="text-decoration: none; display: inline-block;">
+    ▶ Oferta Especial, incluso no PLANO PREMIUM
+</a>
+                </div>
+                        <div style="width: 100%; text-align: center; padding: 20px 0; background-color: transparent;">
+            <img src="../Desktop/selos.png  " 
+                alt="Selos de Segurança" 
+                style="max-width: 100%; height: auto; display: inline-block; vertical-align: middle;">
+                </div>
+            </div>
+        </div>
+        
+
+        <div id="sale-notification" class="sale-popup">
+            <div class="sale-image">
+                <img src="../Desktop/Person Asks People Over 40 To Share Their Pics To___.jfif" alt="Larissa">
+            </div>
+            <div class="sale-content">
+                <p class="sale-text"><strong>Larissa</strong> acabou de comprar o <strong>Plano Premium</strong></p>
+                <p class="sale-time">há 2 minutos</p>
+            </div>
+            <span class="sale-check">✔</span>
+        </div>
+
+    </div>
+</section>
+
+<style>
+    .section-offers {
+        background-color: #0a2a22;
+        color: white;
+        padding: 60px 20px;
+        font-family: 'Segoe UI', sans-serif;
+        text-align: center;
+    }
+
+    .container { max-width: 600px; margin: 0 auto; }
+
+    .highlight-black { color: #000000; }
+
+    .highlight-green { color: #42e211; }
+
+    /* Estilo Plano Bronze */
+    .offer-card.bronze {
+        background: #1a3d34;
+        border-radius: 15px;
+        padding: 30px;
+        margin-bottom: 50px;
+        border: 1px solid #2a5d50;
+    }
+    .offer-card h3 { margin: 0; font-size: 1.5rem; }
+    .price { font-size: 2rem; font-weight: bold; color: #00ff00; margin: 10px 0; }
+    .offer-features { list-style: none; padding: 0; margin: 20px 0; text-align: left; }
+    .offer-features li::before { content: "• "; color: #00ff00; font-weight: bold; }
+    
+    .btn-buy-simple {
+        display: inline-block;
+        padding: 12px 25px;
+        background: transparent;
+        border: 2px solid white;
+        color: white;
+        text-decoration: none;
+        border-radius: 50px;
+        font-weight: bold;
+    }
+
+    /* Estilo Chamada Premium */
+    .premium-call h2 { font-size: 1.4rem; margin: 40px 0; line-height: 1.4; color: rgb(0, 0, 0);   }
+
+    /* Estilo Card Premium (Branco) */
+    .bonus-card {
+        background-color: #ffffff;
+        border-radius: 20px;
+        color: #333;
+        margin: 40px auto;
+        position: relative;
+        box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+        padding-top: 20px;
+        padding-bottom: 10px;
+    }
+
+    .badge-premium {
+        background-color: #00ff00;
+        color: #000;
+        font-weight: 800;
+        padding: 8px 20px;
+        border-radius: 50px;
+        position: absolute;
+        top: -15px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 0.8rem;
+    }
+
+    .card-inner { padding: 30px 20px; }
+    .mockup-bonus img { width: 100%; border-radius: 10px; margin-bottom: 15px; }
+    .bonus-info h3 { font-size: 1.4rem; color: #222; }
+    
+    .check-list-bonus { list-style: none; padding: 0; text-align: left; margin: 20px 0; }
+    .check-list-bonus li { font-size: 0.9rem; margin-bottom: 8px; display: flex; align-items: center; color: #444; }
+    .check-list-bonus li::before {
+        content: '✔'; width: 18px; height: 18px; background: #28a745; color: white;
+        border-radius: 50%; display: inline-block; text-align: center; line-height: 18px;
+        font-size: 0.6rem; margin-right: 10px; flex-shrink: 0;
+    }
+
+    .special-offer-badge {
+        background-color: #e60000;
+        color: #fff;
+        padding: 10px;
+        border-radius: 50px;
+        font-weight: 800;
+        font-size: 0.75rem;
+        text-transform: uppercase;
+    }
+
+    /* Notificação Larissa */
+    .sale-popup {
+        position: fixed; bottom: 20px; left: -450px;
+        background: white; padding: 10px 15px; border-radius: 12px;
+        display: flex; align-items: center; gap: 10px; z-index: 10000;
+        transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        border-left: 4px solid #00b300; box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+    .sale-popup.show-sale { left: 20px; }
+    .sale-image img { width: 45px; height: 45px; border-radius: 50%; }
+    .sale-text { margin: 0; font-size: 0.85rem; color: #333; text-align: left; }
+    .sale-time { font-size: 0.7rem; color: #999; }
+</style>
+
+<script>
+    // Esse script gerencia tanto os "pulos" dos cards quanto a Larissa
+    const observerOptions = { threshold: 0.2 };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                // Se for um card, pula
+                if (entry.target.classList.contains('hidden-pop')) {
+                    entry.target.classList.add('show-pop');
+                }
+                // Se for a seção inteira, dispara a Larissa
+                if (entry.target.id === 'offers-area') {
+                    setTimeout(() => {
+                        document.getElementById('sale-notification').classList.add('show-sale');
+                    }, 2000);
+                }
+            }
+        });
+    }, observerOptions);
+
+    // Observa todos os cards e a seção
+    document.querySelectorAll('.hidden-pop').forEach(el => observer.observe(el));
+    observer.observe(document.getElementById('offers-area'));
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const notification = document.getElementById('sale-notification');
+    const triggerArea = document.querySelector('#offers-area'); 
+    
+    // Variável de controle para garantir que só rode uma vez na sessão
+    let jaAnimou = false;
+
+    const saleObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            // Se entrar na tela E ainda não tiver animado
+            if (entry.isIntersecting && !jaAnimou) {
+                jaAnimou = true; // Bloqueia repetições
+                
+                // 1. APARECE (após 2 segundos)
+                setTimeout(() => {
+                    notification.classList.add('show-sale');
+                }, 2000);
+
+                // 2. SOME DEFINITIVAMENTE (após 7 segundos)
+                setTimeout(() => {
+                    notification.classList.remove('show-sale');
+                    
+                    // Opcional: Remove o elemento do HTML para garantir que não volte
+                    setTimeout(() => {
+                        notification.style.display = 'none';
+                    }, 1000); 
+                }, 7000);
+
+                // Para de observar o elemento imediatamente
+                saleObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1 });
+
+    if (triggerArea && notification) {
+        saleObserver.observe(triggerArea);
+    }
+});
+</script>
+
+<section class="section-faq">
+    <div class="container">
+        
+        <div class="faq-header">
+            <h2>Dúvidas <span class="highlight-green">Frequentes</span></h2>
+            <p>Se você ainda tem alguma dúvida, veja se ela está respondida abaixo:</p>
+        </div>
+
+        <div class="faq-wrapper">
+            <div class="faq-item">
+                <button class="faq-question">
+                    Como recebo o acesso à planilha?
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p>O acesso é imediato! Assim que o pagamento for confirmado, você receberá um e-mail com o link para download da planilha e todos os bônus exclusivos.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">
+                    Preciso pagar mensalidade?
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p>Não. O pagamento é único. Você compra uma vez e tem acesso vitalício à ferramenta, sem cobranças recorrentes.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">
+                    Funciona em qualquer computador ou celular?
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p>Sim! A planilha é compatível com Excel e Google Sheets, podendo ser acessada pelo computador, tablet ou smartphone.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">
+                    Tenho suporte se tiver dúvidas?
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p>Com certeza. Oferecemos suporte prioritário via e-mail e direct para te ajudar com qualquer configuração ou dúvida de uso.</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<style>
+    .section-faq {
+        background-color: #0a2a22; /* Fundo verde escuro padrão */
+        color: white;
+        padding: 80px 20px;
+        font-family: 'Segoe UI', sans-serif;
+    }
+
+    .faq-header { text-align: center; margin-bottom: 40px; }
+    .faq-header h2 { font-size: 2rem; margin-bottom: 10px; }
+    
+    .faq-wrapper {
+        max-width: 700px;
+        margin: 0 auto;
+    }
+
+    .faq-item {
+        margin-bottom: 15px;
+        border-radius: 10px;
+        overflow: hidden;
+        background: #ffffff;
+    }
+
+    .faq-question {
+        width: 100%;
+        padding: 20px;
+        background: #ffffff;
+        border: none;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: #333;
+        font-size: 1.1rem;
+        font-weight: 600;
+        cursor: pointer;
+        text-align: left;
+        transition: background 0.3s;
+    }
+
+    .faq-question:hover { background: #f9f9f9; }
+
+    .faq-icon {
+        color: #00b300;
+        font-size: 1.5rem;
+        font-weight: bold;
+        transition: transform 0.3s;
+    }
+
+    .faq-answer {
+        max-height: 0;
+        overflow: hidden;
+        background: #ffffff;
+        transition: max-height 0.3s ease-out, padding 0.3s ease;
+        padding: 0 20px;
+        color: #666;
+        line-height: 1.6;
+    }
+
+    /* Classe ativa via JS */
+    .faq-item.active .faq-answer {
+        max-height: 200px; /* Altura suficiente para o texto */
+        padding-bottom: 20px;
+    }
+
+    .faq-item.active .faq-icon {
+        transform: rotate(45deg); /* Transforma o + em um x */
+        color: #ff3333;
+    }
+</style>
+
+<script>
+    document.querySelectorAll('.faq-question').forEach(button => {
+        button.addEventListener('click', () => {
+            const faqItem = button.parentElement;
+            
+            // Fecha outros itens se quiser (opcional)
+            // document.querySelectorAll('.faq-item').forEach(item => {
+            //     if(item !== faqItem) item.classList.remove('active');
+            // });
+
+            faqItem.classList.toggle('active');
+        });
+    });
+</script>
+</body>
+</html>
