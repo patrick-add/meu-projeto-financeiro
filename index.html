@@ -863,7 +863,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     /* Faixa Vermelha de Oferta */
-    .special-offer-badge {
+    /*.special-offer-badge {
         background-color: #ff0000;
         color: #fff;
         padding: 12px;
@@ -872,7 +872,7 @@ document.addEventListener("DOMContentLoaded", function() {
         font-size: 0.85rem;
         text-transform: uppercase;
         margin-top: 10px;
-    }
+    }*/
 
     @media (max-width: 480px) {
         .premium-header h2 { font-size: 1.3rem; }
@@ -908,7 +908,48 @@ document.addEventListener("DOMContentLoaded", function() {
             <h2>Receba <span class="highlight-green-premium">A FERRAMENTA EXCLUSIVA</span> adquirindo o Plano Premium!</h2>
         </div>
 
-        <div class="bonus-card hidden-pop">
+        <div class="bonus-card">
+        <div class="badge-premium">Incluso no Plano Premium</div>
+        
+        <div class="card-inner">
+            <div class="mockup-bonus">
+                <img src="img/Design sem nome (4).png" alt="Planilha de Lista de Compras">
+            </div>
+
+            <div class="bonus-info">
+                <h3>Planilha Completa</h3>
+                <p>Chega de surpresas no fim do mês. Organize suas finanças, acompanhe gastos por categoria e veja em tempo real se você está dentro do orçamento.</p>
+                
+                <ul class="check-list-bonus">
+                    <li>Cadastro de receitas e despesas</li>
+                    <li>Controle de gastos por categoria</li>
+                    <li>Comparação entre gasto real e orçamento</li>
+                    <li>Cálculo automático de valores totais</li>
+                    <li>Gráficos claros para visualização</li>
+                </ul>
+            </div>
+
+            <div style="background-color: #f9f9f9; border: 2px dashed #28a745; border-radius: 10px; padding: 20px; margin: 20px 0; text-align: center;">
+                <span style="text-decoration: line-through; color: #888; font-size: 14px;">De R$ 127,00 por apenas</span><br>
+                <span style="color: #28a745; font-size: 32px; font-weight: bold;">R$ 26,80</span><br>
+                <span style="font-size: 12px; color: #555;">Pagamento único • Acesso imediato</span>
+            </div>
+
+            <div class="special-offer-badge" style="text-align: center;">
+                <a href="https://pay.kiwify.com.br/5vqCE15?afid=eEdfLgwq" class="special-offer-badge" style="text-decoration: none; display: block; background-color: #28a745; color: white; padding: 15px; border-radius: 5px; font-weight: bold; font-size: 18px;">
+                    ▶ QUERO O PLANO PREMIUM AGORA
+                </a>
+            </div>
+
+            <div style="width: 100%; text-align: center; padding: 20px 0; background-color: transparent;">
+                <img src="img/selos.png" 
+                     alt="Selos de Segurança" 
+                     style="max-width: 100%; height: auto; display: inline-block; vertical-align: middle;">
+            </div>
+        </div>
+    </div>
+
+      <!--  <div class="bonus-card hidden-pop">
             <div class="badge-premium">Incluso no Plano Premium</div>
             
             <div class="card-inner">
@@ -940,7 +981,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 style="max-width: 100%; height: auto; display: inline-block; vertical-align: middle;">
                 </div>
             </div>
-        </div>
+        </div> -->
         
 
         <div id="sale-notification" class="sale-popup">
@@ -1265,6 +1306,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </script>
 </body>
 </html>
+
 
 
 
